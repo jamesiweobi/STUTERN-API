@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import client from './database/db.js';
 import {
+  homePage,
   getUsers,
   createUser,
   updateUser,
@@ -16,12 +17,8 @@ app.use(express.json());
 
 client.connect();
 
-app.get('/', (req, res) => {
-  res.json({
-    status: 'success',
-    message: 'hello world',
-  });
-});
+// Home Page
+app.get('/', homePage);
 
 //create
 app.post('/users', createUser);

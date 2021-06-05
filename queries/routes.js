@@ -14,6 +14,12 @@ export const getUsers = async (req, res) => {
   }
 };
 
+export const homePage = (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'hello world',
+  });
+};
 // create user
 export const createUser = async (req, res) => {
   try {
