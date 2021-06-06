@@ -1,19 +1,23 @@
 import pkg from 'pg';
 import * as dotenv from 'dotenv';
-
-dotenv.config({
-  path: './.env',
-});
-
 const { Pool } = pkg;
+dotenv.config();
 
-const client = new Pool({
-  user: process.env.DATABASE_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DATABASE_NAME,
-  password: process.env.DATABASE_PASSWORD,
-  port: 5432,
-});
+const proConfig = {
+  connectionString: process.env.DATABASE_URL, //This will be coming from heroku add-on
+};
+
+const devConfig = {
+  user: process.env.PG_USER,
+  password: process.env.PG_PASSWORD,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  port: process.env.PG_PORT,
+};
+
+const client = new Pool(
+  process.env.NODE_ENV === 'production' ? proConfig : devConfig
+);
 
 client.on('connect', () => console.log('Database connected successfully'));
 
