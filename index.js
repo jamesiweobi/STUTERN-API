@@ -3,7 +3,6 @@ import cors from 'cors';
 import client from './database/db.js';
 import path from 'path';
 import {
-  homePage,
   getUsers,
   createUser,
   updateUser,
